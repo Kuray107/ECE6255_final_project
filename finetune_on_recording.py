@@ -1,6 +1,9 @@
 import os
 import time
+import pickle
 import argparse
+
+
 import torch
 from torch.utils.data import DataLoader
 
@@ -66,12 +69,13 @@ def validate(model, criterion, valset, iteration, batch_size,
     print("Validation accuracy {}: {:4f}  ".format(iteration, acc))
 
 
-def train(output_directory, checkpoint_path, warm_start, hparams, device):
+def train(output_directory, checkpoint_path, hparams, device):
 
     torch.manual_seed(hparams.seed)
     torch.cuda.manual_seed(hparams.seed)
 
     train_loader, valset, collate_fn, labels = prepare_dataloaders(hparams)
+
 
     model = X_vector(hparams, n_labels=len(labels)).to(device)
     learning_rate = hparams.learning_rate
@@ -84,6 +88,10 @@ def train(output_directory, checkpoint_path, warm_start, hparams, device):
     if not os.path.isdir(output_directory):
         os.makedirs(output_directory)
         os.chmod(output_directory, 0o775)
+
+    ## Store the label object for the recognition stage
+    with open(os.path.join(output_directory, "labels.pt"), "wb") as out_file:
+        pickle.dump(labels, out_file)
 
     # Load checkpoint if one exists
     iteration = 0
@@ -114,8 +122,8 @@ def train(output_directory, checkpoint_path, warm_start, hparams, device):
             optimizer.step()
 
             duration = time.perf_counter() - start
-            print("Train loss {} {:.6f} Grad Norm {:.6f} {:.2f}s/it".format(
-                    iteration, reduced_loss, grad_norm, duration))
+            #print("Train loss {} {:.6f} Grad Norm {:.6f} {:.2f}s/it".format(
+            #        iteration, reduced_loss, grad_norm, duration))
 
             if (iteration % hparams.iters_per_checkpoint == 0):
                 validate(model, criterion, valset, iteration,
@@ -146,4 +154,4 @@ if __name__ == '__main__':
     print("cuDNN Benchmark:", hparams.cudnn_benchmark)
     print("Use {} as training device".format(device))
 
-    train(args.output_directory, args.checkpoint_path, args.warm_start, hparams, device)
+    train(args.output_directory, args.checkpoint_path, hparams, device)

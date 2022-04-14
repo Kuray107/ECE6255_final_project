@@ -10,8 +10,8 @@ def create_hparams():
         ################################
         # Experiment Parameters        #
         ################################
-        "epochs":200,
-        "iters_per_checkpoint":20,
+        "epochs":20,
+        "iters_per_checkpoint":100,
         "seed":1234,
         "fp16_run":False,
         "cudnn_enabled":True,
@@ -22,7 +22,7 @@ def create_hparams():
         # Data Parameters             #
         ################################
         "training_files":'recordings/train_filelist.txt',
-        "validation_files":'recordings/train_filelist.txt',
+        "validation_files":'recordings/valid_filelist.txt',
         "n_frames_per_utt": 60,
         "n_labels": 5,
 

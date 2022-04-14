@@ -1,0 +1,9 @@
+recordings/HEY_SIRI_8.wav,HEY_SIRI
+recordings/MAYBE_2.wav,MAYBE
+recordings/GOOD_MORNING_3.wav,GOOD_MORNING
+recordings/HEY_SIRI_3.wav,HEY_SIRI
+recordings/MAYBE_8.wav,MAYBE
+recordings/OH_2.wav,OH
+recordings/HELLO_8.wav,HELLO
+recordings/GOOD_MORNING_2.wav,GOOD_MORNING
+recordings/MAYBE_14.wav,MAYBE

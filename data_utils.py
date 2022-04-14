@@ -39,7 +39,7 @@ class MelDataset_filelist(torch.utils.data.Dataset):
         return (mel, label)
 
     def get_mel(self, filename):
-        audio, sampling_rate = torchaudio.load(filename, normalized=True)
+        audio, sampling_rate = torchaudio.load(filename)
         if sampling_rate != self.sample_rate:
             raise ValueError("{} {} SR doesn't match target {} SR".format(sampling_rate, self.sample_rate))
         mel = self.transform_to_mel(audio)
@@ -48,7 +48,7 @@ class MelDataset_filelist(torch.utils.data.Dataset):
         return mel
 
     def __getitem__(self, index):
-        return self.get_mel_text_pair(self.filelist[index])
+        return self.get_mel_label_pair(self.filelist[index])
 
     def __len__(self):
         return len(self.filelist)
@@ -70,6 +70,7 @@ class MelDataset_SpeechCommand(SPEECHCOMMANDS):
             excludes = load_list("validation_list.txt") + load_list("testing_list.txt")
             excludes = set(excludes)
             self._walker = [w for w in self._walker if w not in excludes]
+
 
 
         self.sample_rate = hparams.sample_rate
