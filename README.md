@@ -1,2 +1,32 @@
 # ECE6273_final_project
-This is for ECE6273 final project
+This script is for ECE6273 final project: utterance recognition.
+
+
+
+
+## Setup
+1. Install python requirements.
+    - We recommand using conda for enviroment setup: `conda env create -f environment.yml`
+
+## Recording
+1. Run `python data_recording.py` 
+2. After start running, the system will first ask you to enter the UID. After you enter the UID, the system will start recording for 10 seconds.
+3. You can repeat the same keyword several times during the recording process (with a pause between each utterance). Note that your voice should be loud and clear.
+4. You could also re-enter the same UID and add more utterances into training data if you would like to.
+5. The system will keep asking you to enter UID until you enter FINISH!! to end the process.
+6. The system will create a directory named `recordings`. Check if you have it before moving to the next stage.
+
+
+## Training using a pre-trained model
+Since the recording process usually cannot generate a lot of training utterance, we first pretrained our X-vector model on the [Google Speech Command dataset](https://ai.googleblog.com/2017/08/launching-speech-commands-dataset.html). The pretrained weight is stored as `GSC_pretrained_model.pt`, so you don't need to worry about how to do model pretraining. 
+
+1. Run `python finetune_on_recording.py -o <name of output directory>`
+2. By default, the system will create a directory according to the input argument (default: output_dir), which stores model checkpoints. This process will keep running for a while, but you can stop it using Ctrl+C if the validation accuracy is high enough.  
+
+## Utterance Recognition
+1. Run `python inference.py -o <name of output directory>` By default we load the checkpoint after 200 steps (output_dir/checkpoint_200).
+2. The system will ask you to start recording by press enter. You only need to say the utterance once this time. 
+3. After the recording process ends, the system will output the UID of this utterance and ask you for another utterance.
+
+
+
