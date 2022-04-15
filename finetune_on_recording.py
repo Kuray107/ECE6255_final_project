@@ -67,6 +67,7 @@ def validate(model, criterion, valset, iteration, batch_size,
     model.train()
     print("Validation loss {}: {:6f}  ".format(iteration, val_loss))
     print("Validation accuracy {}: {:4f}  ".format(iteration, acc))
+    return acc
 
 
 def train(output_directory, checkpoint_path, hparams, device):
@@ -100,6 +101,7 @@ def train(output_directory, checkpoint_path, hparams, device):
         model = warm_start_model(checkpoint_path, model, hparams.ignore_layers)
     
     model.train()
+    best_acc = 0.0
     # ================ MAIN TRAINNIG LOOP! ===================
     for epoch in range(epoch_offset, hparams.epochs):
         print("Epoch: {}".format(epoch))
@@ -126,14 +128,21 @@ def train(output_directory, checkpoint_path, hparams, device):
             #        iteration, reduced_loss, grad_norm, duration))
 
             if (iteration % hparams.iters_per_checkpoint == 0):
-                validate(model, criterion, valset, iteration,
+                acc = validate(model, criterion, valset, iteration,
                          hparams.batch_size, collate_fn, device)
-                checkpoint_path = os.path.join(
-                        output_directory, "checkpoint_{}".format(iteration))
-                save_checkpoint(model, optimizer, learning_rate, iteration,
-                                    checkpoint_path)
+
+                if acc > best_acc:
+                    print("found best validation result in steps {}, save it.".format(iteration))
+                    best_acc = acc
+                    checkpoint_path = os.path.join(
+                            output_directory, "best_checkpoint")
+                    save_checkpoint(model, optimizer, learning_rate, iteration,
+                            checkpoint_path)
 
             iteration += 1
+            if iteration > hparams.max_training_steps:
+                print("Finish training process")
+                break
 
 
 if __name__ == '__main__':

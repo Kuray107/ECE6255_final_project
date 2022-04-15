@@ -10,8 +10,9 @@ def create_hparams():
         ################################
         # Experiment Parameters        #
         ################################
-        "epochs":20,
-        "iters_per_checkpoint":100,
+        "epochs": 200,
+        "max_training_steps": 1000,
+        "iters_per_checkpoint":50,
         "seed":1234,
         "fp16_run":False,
         "cudnn_enabled":True,

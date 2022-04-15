@@ -55,11 +55,9 @@ def inference(model, stream, device, labels):
         utterance = utterance / max(abs(utterance))
         mels = transform_to_mel(utterance)
         mels = mels.unsqueeze(0)
-        print(mels.shape)
         
         mels = to_device(mels, device).float()
         predict = model(mels).argmax(dim=1).item()
-        print(predict)
         print(labels[predict])
 
 
@@ -72,7 +70,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     hparams = create_hparams()
-    checkpoint_path = os.path.join(args.output_directory, "checkpoint_200")
+    checkpoint_path = os.path.join(args.output_directory, "best_checkpoint")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Use {} as training device".format(device))

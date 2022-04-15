@@ -11,8 +11,7 @@ CHUNK = 1024
 FORMAT = pyaudio.paFloat32
 CHANNELS = 1
 RATE = 16000
-RECORD_SECONDS = 5
-WAVE_OUTPUT_FILENAME = "voice.wav"
+RECORD_SECONDS = 10
 
 p = pyaudio.PyAudio()
 
