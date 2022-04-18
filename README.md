@@ -3,7 +3,7 @@ This script is for ECE6255 final project: spoken utterance recognition.
 
 
 ## Setup
-- nstall python requirements. We recommand using conda for enviroment setup:
+- install python requirements. We recommand using conda for enviroment setup:
     1. Create a conda environment. `conda create --name ECE6255 python=3.8`
     2. Install [Pytorch ver. 1.10.1](https://pytorch.org/get-started/previous-versions/). you can run `conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 -c pytorch` if your OS is XOS. Otherwise, please follow the link instructions to install the package.
     3. Install Pyaudio `conda install -c anaconda pyaudio`
