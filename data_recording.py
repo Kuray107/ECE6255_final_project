@@ -82,4 +82,4 @@ with open(os.path.join(out_dir, "valid_filelist.txt"), "w") as f:
         f.write(line)
 
 
-print("Please make sure you have all the wav segment file in directory {}, as well as two text file named train_filelist.txt & valid_filelist.txt ")
+print("Please make sure you have all the wav segment file in directory {}, as well as two text file named train_filelist.txt & valid_filelist.txt".format(out_dir))
