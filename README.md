@@ -1,5 +1,8 @@
 # ECE6255_final_project
-This script is for ECE6255 final project: Spoken Utterance Recognition (SUR). In order to run our code, please first follow instructions in Stage 0. If you only want to test our 5-UIDs (i,e., "Hello", "Good Morning", "Maybe", "Hey Siri", and "Oh") fine-tuned SUR system, please skip Stage 1 & 2 and run Stage 3 'python inference.py -o output_dir' directly. If you would like to go through the whole process, feel free to delete the directories `output_dir` and `recordings` and start from stage 1. 
+This script is for ECE6255 final project: Spoken Utterance Recognition (SUR).
+- In order to run our code, please first follow instructions in Stage 0. 
+- If you only want to test our 5-UIDs (i,e., "Hello", "Good Morning", "Maybe", "Hey Siri", and "Oh") fine-tuned SUR system, please skip Stage 1 & 2 and run Stage 3 `python inference.py -o output_dir` directly. 
+- If you would like to go through the whole process, please delete the directories `output_dir` and `recordings` and start from stage 1. 
 
 
 ## Stage 0: Environmental Setup
