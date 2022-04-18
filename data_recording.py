@@ -28,7 +28,7 @@ if not os.path.isdir(out_dir):
 labels_dict = defaultdict(list)
 
 while(True):
-    UID = input("Please enter the UID (Or enter FINSIH!! to finish the registration): ").strip()
+    UID = input("Please enter the UID (Or enter FINISH!! to finish the registration): ").strip()
     if UID == "FINISH!!":
         print("Finish the keyword registration process process.")
         break

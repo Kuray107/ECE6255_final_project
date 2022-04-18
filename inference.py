@@ -34,7 +34,7 @@ def inference(model, stream, device, labels):
         )
 
     while(True):
-        _ = input("Please press enter to start recording!").strip()
+        _ = input("Please press enter to start recording! Other wise, press Ctrl+C to exit.").strip()
         print("start recording utterance... The recording will end in {} seconds".format(RECORD_SECONDS))
         frames = []
         utterance = []
