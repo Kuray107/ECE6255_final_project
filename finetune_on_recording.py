@@ -102,6 +102,7 @@ def train(output_directory, checkpoint_path, hparams, device):
     
     model.train()
     best_acc = 0.0
+    finish_training = False
     # ================ MAIN TRAINNIG LOOP! ===================
     for epoch in range(epoch_offset, hparams.epochs):
         print("Epoch: {}".format(epoch))
@@ -142,8 +143,10 @@ def train(output_directory, checkpoint_path, hparams, device):
             iteration += 1
             if iteration > hparams.max_training_steps:
                 print("Finish training process")
+                finish_training = True
                 break
-
+        if finish_training:
+            break
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
