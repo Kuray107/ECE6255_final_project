@@ -26,7 +26,7 @@ Since the recording process usually cannot generate a lot of training utterance,
 2. By default, the system will create a directory according to the input argument (default: output_dir), which stores model checkpoints. This process will keep running for a while, but you can stop it using Ctrl+C if the validation accuracy is high enough.  
 
 ## Utterance Recognition
-1. Run `python inference.py -o <name of output directory>` By default we load the checkpoint after 200 steps (output_dir/checkpoint_200).
+1. Run `python inference.py -o <name of output directory>` (default: output_dir).
 2. The system will ask you to start recording by press enter. You only need to say the utterance once this time. 
 3. After the recording process ends, the system will output the UID of this utterance and ask you for another utterance.
 
